@@ -38,5 +38,8 @@ public class Mensagem {
 	public void setArguments(String arguments) {
 		this.arguments = arguments;
 	}
-
+	@Override
+	public String toString() {
+		return "messageType: "+this.messageType+", method: "+this.method+", reference: "+this.objectReference+", requestId: "+this.requestId+", arguments: "+this.arguments;
+	}
 }

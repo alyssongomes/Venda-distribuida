@@ -3,8 +3,8 @@ package br.ufc.venda.model;
 public class Cliente {
 	
 	private String nome;
-	private String cpf;
-	private String rg;
+	private Long cpf;
+	private Long rg;
 	private String endereco;
 	
 	public String getNome() {
@@ -13,16 +13,16 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getCpf() {
+	public Long getCpf() {
 		return cpf;
 	}
-	public void setCpf(String cpf) {
+	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
-	public String getRg() {
+	public Long getRg() {
 		return rg;
 	}
-	public void setRg(String rg) {
+	public void setRg(Long rg) {
 		this.rg = rg;
 	}
 	public String getEndereco() {
@@ -32,6 +32,9 @@ public class Cliente {
 		this.endereco = endereco;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Cliente: ["+this.nome+","+this.cpf+","+this.rg+","+this.endereco+"]";
+	}
 	
 }

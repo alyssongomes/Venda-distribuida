@@ -1,11 +1,11 @@
-package br.ufc.venda.connection;
+package br.ufc.venda.client.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class ConnectionFactory {
+public class ConnectionFactoryReplica {
 
-	private static String url = "jdbc:postgresql://localhost/sd_venda";
+	private static String url = "jdbc:postgresql://localhost/sd_venda_replica";
 	private static String user = "postgres";
 	private static String password = "postgres";
 	

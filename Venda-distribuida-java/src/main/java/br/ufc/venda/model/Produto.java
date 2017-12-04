@@ -2,10 +2,18 @@ package br.ufc.venda.model;
 
 public class Produto {
 	
+	private int id;
 	private String nome;
 	private String descricao;
 	private double valor;
 	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -25,6 +33,9 @@ public class Produto {
 		this.valor = valor;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "["+this.id+"] nome: "+this.nome+", descricao: "+this.descricao+", valor: "+this.valor;
+	}
 	
 }

@@ -1,23 +1,16 @@
 package br.ufc.venda.model;
 
-public class ModoPagamento {
-
-	private Pagamento pagamento;
-	private int numCartao;
+public enum ModoPagamento {
 	
-	public Pagamento getPagamento() {
-		return pagamento;
-	}
-	public void setPagamento(Pagamento pagamento) {
+	DEBITO(1), CREDITO(2);
+	
+	private ModoPagamento(int pagamento){
 		this.pagamento = pagamento;
 	}
-	public int getNumCartao() {
-		return numCartao;
+	
+	private int pagamento;
+	
+	public int pagamento(){
+		return this.pagamento;
 	}
-	public void setNumCartao(int numCartao) {
-		this.numCartao = numCartao;
-	}
-	
-	
-	
 }

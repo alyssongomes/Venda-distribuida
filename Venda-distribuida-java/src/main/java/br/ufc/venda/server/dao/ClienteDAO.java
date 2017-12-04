@@ -1,11 +1,12 @@
-package br.ufc.venda.dao;
+package br.ufc.venda.server.dao;
 
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import br.ufc.venda.connection.ConnectionFactory;
 import br.ufc.venda.model.Cliente;
+import br.ufc.venda.server.connection.ConnectionFactory;
 
 public class ClienteDAO {
 	
@@ -13,22 +14,23 @@ public class ClienteDAO {
 	private PreparedStatement stm;
 	private ResultSet rs;
 	
-	public Cliente autenticar(Cliente cliente){
+	public Cliente autenticar(String nome, Long cpf){
 		Cliente c = new Cliente();
+		
 		try{
 			con = ConnectionFactory.getConnection();
-			stm = con.prepareStatement("SELECT * FROM clientes WHERE cpf = ? and nome = ?");
-			stm.setString(0, cliente.getCpf());
-			stm.setString(1, cliente.getNome());
+			stm = con.prepareStatement("SELECT * FROM cliente WHERE cpf = ? AND nome = ?");
+			stm.setLong(1, cpf);
+			stm.setString(2, nome);
 		
 			rs = stm.executeQuery();
-			rs.beforeFirst();
-			while(rs.next()){
-				c.setCpf(rs.getString("cpf"));
-				c.setNome(rs.getString("nome"));
-				c.setRg(rs.getString("rg"));
-				c.setEndereco(rs.getString("endereco"));
-			}
+			rs.next();
+			
+			c.setCpf(rs.getLong("cpf"));
+			c.setNome(rs.getString("nome"));
+			c.setRg(rs.getLong("rg"));
+			c.setEndereco(rs.getString("endereco"));
+			
 			stm.close();
 			return c;
 		}catch (Exception e) {
@@ -40,11 +42,11 @@ public class ClienteDAO {
 	public boolean salvar(Cliente cliente){
 		try{
 			con = ConnectionFactory.getConnection();
-			stm = con.prepareStatement("INSERT INTO clientes (nome, cpf, rg, endereco) VALUES (?,?,?,?)");
-			stm.setString(0, cliente.getNome());
-			stm.setString(1, cliente.getCpf());
-			stm.setString(2, cliente.getRg());
-			stm.setString(3, cliente.getEndereco());
+			stm = con.prepareStatement("INSERT INTO cliente (nome, cpf, rg, endereco) VALUES (?,?,?,?)");
+			stm.setString(1, cliente.getNome());
+			stm.setLong(2, cliente.getCpf());
+			stm.setLong(3, cliente.getRg());
+			stm.setString(4, cliente.getEndereco());
 			
 			stm.execute();
 			stm.close();

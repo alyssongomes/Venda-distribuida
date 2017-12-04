@@ -1,12 +1,15 @@
 package br.ufc.venda.model;
 
+import java.util.Date;
+
 public class Venda {
 
 	private Produto produto;
 	private Cliente cliente;
 	private int quantidade;
 	private double total;
-	private String dataVenda;
+	private Date dataVenda;
+	private Pagamento pagamento;
 	
 	public Produto getProduto() {
 		return produto;
@@ -32,13 +35,17 @@ public class Venda {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	public String getDataVenda() {
+	public Date getDataVenda() {
 		return dataVenda;
 	}
-	public void setDataVenda(String dataVenda) {
+	public void setDataVenda(Date dataVenda) {
 		this.dataVenda = dataVenda;
 	}
-	
-	
+	public Pagamento getPagamento() {
+		return pagamento;
+	}
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
+	}
 	
 }

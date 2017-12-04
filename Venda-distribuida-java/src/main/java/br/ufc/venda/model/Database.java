@@ -5,7 +5,8 @@ public class Database {
 	private String operacao;
 	private String dados;
 	private String tabela;
-	private int idBase;
+	private int porta;
+	private String ip;
 	
 	public String getOperacao() {
 		return operacao;
@@ -25,13 +26,17 @@ public class Database {
 	public void setTabela(String tabela) {
 		this.tabela = tabela;
 	}
-	public int getIdBase() {
-		return idBase;
+	public int getPorta() {
+		return porta;
 	}
-	public void setIdBase(int idBase) {
-		this.idBase = idBase;
+	public void setPorta(int porta) {
+		this.porta = porta;
 	}
-	
-	
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}	
 	
 }
