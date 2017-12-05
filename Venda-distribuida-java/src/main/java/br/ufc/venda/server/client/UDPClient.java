@@ -30,6 +30,7 @@ public class UDPClient {
 		try{
 			request = new DatagramPacket(requisicao,  requisicao.length, aHost, this.porta);
 			aSocket.send(request);
+			aSocket.setSoTimeout(200);
 		} catch (SocketException e){
 			System.out.println("Socket: " + e.getMessage());
 		} catch (IOException e){
@@ -40,25 +41,26 @@ public class UDPClient {
 	public byte[] getReplay(){
 		byte[] buffer = new byte[request.getData().length];
 		DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-		try{
-			aSocket.receive(reply);
-			return reply.getData();
-		}catch (SocketTimeoutException e) {
-			System.out.println("Reenviando...");
+		while(true){
 			try{
-				aSocket.send(this.request);
-				aSocket.setSoTimeout(200);
-			} 
-			catch (SocketException se){ 
-				System.out.println("Socket: " + se.getMessage());
-			} 
-			catch (IOException ioe){ 
-				System.out.println("IO: " + ioe.getMessage());
-			} 
-		}catch (IOException e){
-			System.out.println("IO: " + e.getMessage());
+				aSocket.receive(reply);
+				return reply.getData();
+			}catch (SocketTimeoutException e) {
+				System.out.println("Reenviando...");
+				try{
+					aSocket.send(this.request);
+					aSocket.setSoTimeout(200);
+				} 
+				catch (SocketException se){ 
+					System.out.println("Socket: " + se.getMessage());
+				} 
+				catch (IOException ioe){ 
+					System.out.println("IO: " + ioe.getMessage());
+				} 
+			}catch (IOException e){
+				System.out.println("IO: " + e.getMessage());
+			}
 		}
-		return null;
 	}
 	
 	public void finaliza(){
@@ -68,4 +70,5 @@ public class UDPClient {
 			System.out.println("Não foi possível fechar o socket: "+e.getMessage());
 		}
 	}
+	
 }

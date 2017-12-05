@@ -114,7 +114,7 @@ public class UDPServer {
 		Random random = new Random(100);
 		Gson gson = new Gson();
 		
-		System.out.println("UDPServer rodando ...");
+		System.out.println("server.UDPServer["+udps.PORTA+"] rodando ...");
 		try{
 			while(true){
 				//Pegando requisição

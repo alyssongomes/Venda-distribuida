@@ -1,6 +1,5 @@
 package br.ufc.venda.client.dao;
 
-import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,7 +51,22 @@ public class ClienteDAO {
 			stm.close();
 			return true;
 		}catch (Exception e) {
-			System.err.println("Não foi possíve salvar o cliente: "+e.getMessage());
+			System.err.println("Não foi possível salvar o cliente: "+e.getMessage());
+		}
+		return false;
+	}
+	
+	public boolean excluir(Cliente cliente){
+		try{
+			con = ConnectionFactoryReplica.getConnection();
+			stm = con.prepareStatement("DELETE FROM cliente WHERE cpf = ?");
+			stm.setLong(1, cliente.getCpf());
+			
+			stm.execute();
+			stm.close();
+			return true;
+		}catch (Exception e) {
+			System.err.println("Não foi possível excluir o cliente: "+e.getMessage());
 		}
 		return false;
 	}

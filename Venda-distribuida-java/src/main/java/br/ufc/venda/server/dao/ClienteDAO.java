@@ -1,18 +1,23 @@
 package br.ufc.venda.server.dao;
 
-import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import br.ufc.venda.model.Cliente;
 import br.ufc.venda.server.connection.ConnectionFactory;
+import br.ufc.venda.server.proxy.BroadcastClienteProxy;
 
 public class ClienteDAO {
 	
 	private Connection con;
 	private PreparedStatement stm;
 	private ResultSet rs;
+	private BroadcastClienteProxy bcp;
+	
+	public ClienteDAO(){
+		bcp = new BroadcastClienteProxy();
+	}
 	
 	public Cliente autenticar(String nome, Long cpf){
 		Cliente c = new Cliente();
@@ -50,9 +55,13 @@ public class ClienteDAO {
 			
 			stm.execute();
 			stm.close();
-			return true;
+			
+			if(bcp.refresh(cliente))
+				return true;
+			return false;
 		}catch (Exception e) {
 			System.err.println("Não foi possíve salvar o cliente: "+e.getMessage());
+			bcp.rollback(cliente);
 		}
 		return false;
 	}

@@ -39,4 +39,8 @@ public class Database {
 		this.ip = ip;
 	}	
 	
+	@Override
+	public String toString() {
+		return "IP:"+this.ip+", porta:"+this.porta;
+	}
 }
