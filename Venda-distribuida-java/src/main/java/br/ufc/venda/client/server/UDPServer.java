@@ -19,8 +19,9 @@ import br.ufc.venda.client.server.Despachante;
 public class UDPServer {
 
 	private DatagramSocket aSocket;
-	private int PORTA = 6000;
 	public static int REPLY = 1;
+	public static final int PORTA = 6000;
+	public static final String IP = "127.0.0.1";
 	
 	public UDPServer(){
 		try{

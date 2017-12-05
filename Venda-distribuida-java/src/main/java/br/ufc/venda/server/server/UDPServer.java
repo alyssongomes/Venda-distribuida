@@ -18,8 +18,9 @@ import br.ufc.venda.model.Mensagem;
 public class UDPServer {
 	
 	private DatagramSocket aSocket;
-	private int PORTA = 5000;
-	public static int REPLY = 1;
+	private static int REPLY = 1;
+	private final int PORTA = 5000;
+	
 	
 	public UDPServer(){
 		try{
@@ -120,7 +121,6 @@ public class UDPServer {
 				//Pegando requisição
 				DatagramPacket request = udps.getRequest();
 				if(random.nextInt() % 3 == 0){
-					
 					if(udps.verificarPacotes(historicoRespostas, request, gson)){
 						//Retransmite a reposta caso a requisição esteja duplicada
 						udps.sendReply(request.getData(), request.getAddress(), request.getPort());

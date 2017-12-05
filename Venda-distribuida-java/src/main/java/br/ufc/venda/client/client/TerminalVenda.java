@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.ufc.venda.client.proxy.ClienteProxy;
+import br.ufc.venda.client.proxy.DatabaseProxy;
 import br.ufc.venda.client.proxy.ProdutoProxy;
 import br.ufc.venda.client.proxy.VendaProxy;
 import br.ufc.venda.model.Cliente;
@@ -19,11 +20,17 @@ public class TerminalVenda {
 	ClienteProxy cproxy;
 	VendaProxy vproxy;
 	ProdutoProxy pproxy;
+	DatabaseProxy dbproxy;
 	
 	public TerminalVenda(){
 		cproxy = new ClienteProxy();
 		vproxy = new VendaProxy();
 		pproxy = new ProdutoProxy();
+		dbproxy = new DatabaseProxy();
+	}
+	
+	public boolean verificarBase(){
+		return dbproxy.verificarBaseReplica();
 	}
 	
 	private void showMain(){
@@ -141,8 +148,11 @@ public class TerminalVenda {
 	
 	public static void main(String[] args) {
 		TerminalVenda tv = new TerminalVenda();
-		while(true)
-			tv.showMain();
+		if(tv.verificarBase())
+			while(true)
+				tv.showMain();
+		else
+			JOptionPane.showMessageDialog(null, "A base deste cliente não está no mestre!", "VENDA-DISTRIBUÍDA", JOptionPane.ERROR_MESSAGE);
 	}
 
 }
