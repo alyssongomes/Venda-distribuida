@@ -28,6 +28,7 @@ public class UDPClient {
 	}
 	
 	public void sendRequest(byte[] requisicao){
+		System.out.println(new String(requisicao));
 		try{
 			request = new DatagramPacket(requisicao,  requisicao.length, aHost, this.porta);
 			aSocket.send(request);

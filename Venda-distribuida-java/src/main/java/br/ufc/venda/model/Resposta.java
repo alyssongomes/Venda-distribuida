@@ -20,5 +20,8 @@ public class Resposta {
 	public void setResposta(String resposta) {
 		this.resposta = resposta;
 	}
-	
+	@Override
+	public String toString() {
+		return "codigo:"+this.codigo+","+this.resposta;
+	}
 }

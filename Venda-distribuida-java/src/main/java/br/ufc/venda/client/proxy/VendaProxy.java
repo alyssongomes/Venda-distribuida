@@ -45,6 +45,7 @@ public class VendaProxy {
 		venda.setPagamento(pagamento);
 		
 		Resposta resposta = (Resposta) desempacota(new String(doOperation("Venda", "realizarVenda", empacota(venda))), Resposta.class);
+		System.out.println(resposta);
 		if(resposta.getCodigo() == 200)
 			return true;
 		else

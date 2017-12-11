@@ -39,6 +39,7 @@ public class ClienteProxy {
 		c.setEndereco(endereco);
 		
 		Resposta resposta = (Resposta) desempacota(new String(doOperation("Cliente", "registrarCliente", empacota(c))), Resposta.class);
+		System.out.println(resposta);
 		if(resposta.getCodigo() == 200)
 			return true;
 		else

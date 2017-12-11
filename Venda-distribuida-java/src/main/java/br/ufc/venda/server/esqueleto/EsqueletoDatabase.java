@@ -25,8 +25,8 @@ public class EsqueletoDatabase {
 				resposta.setCodigo(Resposta.SUCCESS);
 				resposta.setResposta("true");
 			}else{
-				resposta.setCodigo(Resposta.ERROR);
 				resposta.setResposta("false");
+				resposta.setCodigo(Resposta.ERROR);
 			}
 		}else{
 			resposta.setCodigo(Resposta.SUCCESS);

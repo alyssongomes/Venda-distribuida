@@ -92,12 +92,14 @@ public class UDPServer {
 		JsonReader reader = new JsonReader(new StringReader(requestJson));
 		reader.setLenient(true);
 		Mensagem mensagem = gson.fromJson(reader, Mensagem.class);
+		System.out.println(mensagem);
 		
 		//Pegando o resultado
 		String reply  = despachante.invoke(mensagem);
 		mensagem.setArguments(reply);
 		mensagem.setMessageType(REPLY);
-
+		System.out.println(mensagem);
+		
 		//Empacotando o resultado e envia
 		byte[] response = gson.toJson(mensagem).getBytes(); 
 		this.sendReply(response, request.getAddress(), request.getPort());
